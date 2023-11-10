@@ -1,12 +1,30 @@
+// Initialize current row and column
 let curRow = 0;
 let curCol = 0;
 
+// Select the main element
+const main = document.querySelector('#main');
+
+// Create rows and columns
+for (let i = 0; i < 6; i++) {
+    const row = document.createElement('div');
+    row.classList.add('row', `r${i}`);
+    for (let j = 0; j < 5; j++) {
+        const col = document.createElement('div');
+        col.id = `r${i}c${j}`;
+        row.appendChild(col);
+    }
+    main.appendChild(row);
+}
+
+// Function to fetch a random word
 async function getRandomWord() {
     const response = await fetch("https://random-word-api.herokuapp.com/word?length=5");
     const data = await response.json();
     return data;
 }
 
+// Fetch a random word and attach event listeners
 getRandomWord().then(randomWord => {
     const word = randomWord.toString()
     console.log(word);
@@ -33,7 +51,7 @@ getRandomWord().then(randomWord => {
     console.log(`ERROR: ${error}`);
 });
 
-
+// Function to attach keypress event listener
 function attachListener(row, col) {
     const handler = (event) => {
         document.querySelector(`#r${row}c${col}`).textContent = event.key.toUpperCase();
@@ -50,6 +68,7 @@ function attachListener(row, col) {
     document.addEventListener('keypress', handler);
 }
 
+// Function to get the word from the row
 function getWord(row) {
     let word = "";
     document.querySelectorAll(`.r${row} > div`).forEach(box => {
@@ -58,6 +77,7 @@ function getWord(row) {
     return word;
 }
 
+// Function to check the user's word against the actual word
 function checkWord(actualWord, word, row) {
     const actualWordArr = actualWord.split('');
     const wordArr = word.split('');
