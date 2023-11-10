@@ -1,0 +1,30 @@
+.row > div {
+    border: 1px solid black;
+}
+
+.row > div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.row {
+    display: flex;
+    width: fit-content;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+#enterBtn{
+    margin-top: 30px;
+
+}
