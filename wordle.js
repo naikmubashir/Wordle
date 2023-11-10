@@ -12,9 +12,23 @@ getRandomWord().then(randomWord => {
     console.log(word);
     attachListener(curRow, curCol);
     document.querySelector('#enterBtn').addEventListener('click', () => {
-        const userWord = getWord(0);
-        checkWord(word.toLowerCase(), userWord.toLowerCase(), 0);
-    })
+        if (curCol > 4) {
+            const userWord = getWord(curRow);
+            if (checkWord(word.toLowerCase(), userWord.toLowerCase(), curRow)) {
+                document.querySelector('#heading').textContent = "You Won!"
+                return;
+            }
+            if (curRow >= 5) {
+                document.querySelector('#heading').textContent = "You Lose!"
+                return;
+            }
+            curRow++;
+            curCol = 0;
+            attachListener(curRow, curCol);
+        } else {
+            alert("Please fill the whole row!");
+        }
+    });
 }).catch(error => {
     console.log(`ERROR: ${error}`);
 });
@@ -57,4 +71,5 @@ function checkWord(actualWord, word, row) {
             box.style.background = '#999';
         }
     }
+    return actualWord === word;
 }
