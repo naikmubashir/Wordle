@@ -25,6 +25,18 @@ function drawGrid() {
         }
         main.appendChild(row);
     }
+
+    // Check if the device is a mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    // If it's a mobile device, set focus on the first item in the grid
+    if (isMobile) {
+        const firstGridItem = document.getElementById('r0c0');
+        if (firstGridItem) {
+            firstGridItem.setAttribute('tabindex', '0');
+            firstGridItem.focus();
+        }
+    }
 }
 
 /**
